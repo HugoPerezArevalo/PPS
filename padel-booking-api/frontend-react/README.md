@@ -4,8 +4,9 @@ Frontend **separado** del backend, construido con **React 18 + Vite**. Consume l
 API REST del backend FastAPI mediante **JWT** (`Bearer` en la cabecera
 `Authorization`), con renovación automática del access token.
 
-> El backend (FastAPI) es un proyecto independiente en la raíz del repositorio.
-> Esta carpeta es la aplicación de cliente: se ejecuta y se despliega por separado.
+> El backend (FastAPI) es un proyecto independiente, en la carpeta
+> `padel-booking-api/` del repositorio. Esta carpeta es la aplicación de cliente:
+> se ejecuta y se despliega por separado.
 
 ## Requisitos
 

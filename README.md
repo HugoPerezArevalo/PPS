@@ -1,5 +1,7 @@
 # 🎾 Padel Court Booking API
 
+Repositorio de trabajos de **PPS · Ciberseguridad** — Hugo Pérez Arévalo.
+
 API REST para la **gestión de reservas de pistas de pádel**, construida con
 **FastAPI**, **SQLAlchemy 2.0** y **JWT**.
 
@@ -46,59 +48,68 @@ y un panel de estadísticas.
 ## 📂 Estructura
 
 ```
-padel-booking-api/
-├── app/
-│   ├── main.py            # Aplicación FastAPI, CORS, routers y lifespan
-│   ├── config.py          # Configuración (variables de entorno)
-│   ├── database.py        # Engine, sesión y Base declarativa
-│   ├── models.py          # Modelos ORM (users, courts, bookings, ...)
-│   ├── schemas.py         # Esquemas Pydantic de entrada/salida
-│   ├── security.py        # Hash de contraseñas y JWT
-│   ├── dependencies.py    # Dependencias (usuario actual, roles, ...)
-│   ├── seed.py            # Datos de demo
-│   ├── routers/           # Endpoints por dominio
-│   │   ├── auth.py        # Registro, login, refresh
-│   │   ├── users.py       # Perfiles y administración
-│   │   ├── courts.py      # Pistas, horarios y cierres
-│   │   ├── availability.py# Franjas y búsqueda de pistas libres
-│   │   ├── bookings.py    # Reservas
-│   │   ├── payments.py    # Pagos
-│   │   ├── reviews.py     # Valoraciones
-│   │   ├── matches.py     # Matchmaking
-│   │   └── stats.py       # Panel de estadísticas
-│   └── services/          # Lógica de negocio
-│       ├── availability.py
-│       ├── bookings.py
-│       ├── courts.py
-│       ├── stats.py
-│       └── tokens.py      # Revocación/rotación de JWT
-├── frontend/              # SPA estática (verde/blanco, estilo Playtomic)
-│   ├── index.html
-│   ├── css/styles.css
-│   └── js/
-│       ├── app.js         # Enrutado por hash y navegación
-│       ├── api.js         # Cliente HTTP + refresco de token
-│       ├── store.js       # Sesión (tokens/usuario)
-│       ├── ui.js          # Componentes y utilidades
-│       ├── components/    # Login y modal de reserva
-│       └── views/         # home, bookings, matches, profile, admin
-├── frontend-react/        # Frontend SEPARADO en React + Vite (proyecto Node)
-│   ├── index.html
-│   ├── vite.config.js     # proxy /api -> backend en desarrollo
-│   ├── package.json
-│   └── src/               # componentes, contextos, páginas y cliente API
-├── tests/                 # Tests de extremo a extremo
-├── requirements.txt
-├── requirements-dev.txt
-├── Dockerfile
-├── docker-compose.yml
-├── Makefile
-└── .env.example
+pps-ciberseguridad-trabajos-pps-26-27-hugoperezarevalo/
+├── README.md                 # Este documento (raíz del repositorio)
+├── .gitignore
+└── padel-booking-api/        # Proyecto: API + frontends
+    ├── app/
+    │   ├── main.py            # Aplicación FastAPI, CORS, routers y lifespan
+    │   ├── config.py          # Configuración (variables de entorno)
+    │   ├── database.py        # Engine, sesión y Base declarativa
+    │   ├── models.py          # Modelos ORM (users, courts, bookings, ...)
+    │   ├── schemas.py         # Esquemas Pydantic de entrada/salida
+    │   ├── security.py        # Hash de contraseñas y JWT
+    │   ├── dependencies.py    # Dependencias (usuario actual, roles, ...)
+    │   ├── seed.py            # Datos de demo
+    │   ├── routers/           # Endpoints por dominio
+    │   │   ├── auth.py        # Registro, login, refresh, logout
+    │   │   ├── users.py       # Perfiles y administración
+    │   │   ├── courts.py      # Pistas, horarios y cierres
+    │   │   ├── availability.py# Franjas y búsqueda de pistas libres
+    │   │   ├── bookings.py    # Reservas
+    │   │   ├── payments.py    # Pagos
+    │   │   ├── reviews.py     # Valoraciones
+    │   │   ├── matches.py     # Matchmaking
+    │   │   └── stats.py       # Panel de estadísticas
+    │   └── services/          # Lógica de negocio
+    │       ├── availability.py
+    │       ├── bookings.py
+    │       ├── courts.py
+    │       ├── stats.py
+    │       └── tokens.py      # Revocación/rotación de JWT
+    ├── frontend/              # SPA estática (verde/blanco, estilo Playtomic)
+    │   ├── index.html
+    │   ├── css/styles.css
+    │   └── js/
+    │       ├── app.js         # Enrutado por hash y navegación
+    │       ├── api.js         # Cliente HTTP + refresco de token
+    │       ├── store.js       # Sesión (tokens/usuario)
+    │       ├── ui.js          # Componentes y utilidades
+    │       ├── components/    # Login y modal de reserva
+    │       └── views/         # home, bookings, matches, profile, admin
+    ├── frontend-react/        # Frontend SEPARADO en React + Vite (proyecto Node)
+    │   ├── index.html
+    │   ├── vite.config.js     # proxy /api -> backend en desarrollo
+    │   ├── package.json
+    │   └── src/               # componentes, contextos, páginas y cliente API
+    ├── tests/                 # Tests de extremo a extremo
+    ├── requirements.txt
+    ├── requirements-dev.txt
+    ├── Dockerfile
+    ├── docker-compose.yml
+    ├── Makefile
+    └── .env.example
 ```
 
 ---
 
 ## 🚀 Puesta en marcha
+
+> Todos los comandos de esta sección se ejecutan **desde la carpeta del proyecto**:
+
+```bash
+cd padel-booking-api
+```
 
 ### 1. Entorno virtual e instalación
 
@@ -155,17 +166,18 @@ opción recomendada y la que mejor refleja el enfoque "frontend separado".
 
 ```bash
 # Terminal 1 — backend
+cd padel-booking-api
 uvicorn app.main:app --reload --port 8000
 
 # Terminal 2 — frontend React
-cd frontend-react
+cd padel-booking-api/frontend-react
 npm install
 npm run dev          # http://localhost:5173
 ```
 
 En desarrollo, Vite hace de **proxy** de `/api` hacia el backend (sin CORS).
 Para producción, `npm run build` genera `dist/` y se configura la API con
-`VITE_API_BASE`. Ver `frontend-react/README.md` para todos los detalles.
+`VITE_API_BASE`. Ver `padel-booking-api/frontend-react/README.md` para todos los detalles.
 
 ### `frontend/` — SPA estática ligera (sin build)
 
@@ -187,6 +199,7 @@ Incluye:
 Se sirve automáticamente desde el propio FastAPI (si la carpeta `frontend/` existe):
 
 ```bash
+cd padel-booking-api
 uvicorn app.main:app --reload
 # Frontend:  http://127.0.0.1:8000/app/
 # API docs:  http://127.0.0.1:8000/docs
@@ -196,7 +209,7 @@ También puedes servirlo por separado con cualquier servidor estático
 (el backend debe estar en `http://127.0.0.1:8000`, ya incluido en `CORS_ORIGINS`):
 
 ```bash
-python -m http.server 3000 --directory frontend
+python -m http.server 3000 --directory padel-booking-api/frontend
 # Frontend:  http://127.0.0.1:3000/
 ```
 
@@ -390,6 +403,7 @@ curl -s $BASE/stats/dashboard -H "$AUTH"
 ## 🐳 Docker
 
 ```bash
+cd padel-booking-api
 docker compose up --build
 # API en http://localhost:8000
 ```
@@ -406,6 +420,7 @@ docker run -p 8000:8000 -e SECRET_KEY=$(python3 -c "import secrets;print(secrets
 ## ✅ Tests
 
 ```bash
+cd padel-booking-api
 pytest -q
 ```
 
@@ -430,4 +445,4 @@ reprogramación, pagos, valoraciones, matchmaking y estadísticas.
 ## 📄 Licencia
 
 MIT.
-# pps-ciberseguridad-trabajos-pps-26-27-hugoperezarevalo
+
