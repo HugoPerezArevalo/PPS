@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    container_name: padel-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: sqlite:////data/padel.db
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      SEED_ON_STARTUP: "true"
+    volumes:
+      - padel-data:/data
+    restart: unless-stopped
+
+volumes:
+  padel-data:

@@ -1,0 +1,50 @@
+# ==========================================================================
+# .gitignore raíz del repositorio
+# (el proyecto padel-booking-api/ tiene además su propio .gitignore)
+# ==========================================================================
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# --- Entornos virtuales ---------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# --- Variables de entorno / secretos --------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- Bases de datos -------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Node / frontend ------------------------------------------------------
+node_modules/
+frontend-react/dist/
+frontend-react/dist-ssr/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Editores / SO --------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
